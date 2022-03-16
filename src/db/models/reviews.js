@@ -9,23 +9,11 @@ const Review = sequelize.define(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    name: {
-      type: DataTypes.STRING,
+    text: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    age: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    country: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
