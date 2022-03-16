@@ -5,15 +5,17 @@ import productRouter from "./services/product/index.js";
 import reviewRouter from "./services/reviews/index.js";
 
 // {
-//   "id": "16194c21-507a-41cd-b68c-4326d482a6fa",
-//     "name": "ALIIII",
-//       "category": "Fratello",
-//         "description": "HE WANTS TO FUCK UP EVERYONE WHO LIKES SQL",
-//           "image": "url(IMAGE LINK)",
-//             "price": 99,
-//               "createdAt": "2022-03-16T14:46:41.617Z",
-//                 "updatedAt": "2022-03-16T14:47:59.622Z",
-//                   "productId": null
+//   "name": "ALIIII",
+//     "category": "Fratello",
+//       "description": "HE WANTS TO FUCK UP EVERYONE WHO LIKES SQL",
+//         "image": "url(IMAGE LINK)",
+//           "price": 99,
+// }
+// {
+
+//   "username": "tiammazzo",
+//     "text" : "succhiamelo"
+
 // }
 
 const server = express();
