@@ -30,15 +30,13 @@ reviewRouter.post("/", async (req, res, next) => {
   }
 });
 
-reviewRouter.put("/:id", async (req, res, next) => {
+reviewRouter.post("/:id", async (req, res, next) => {
   try {
-    const result = await Reviews.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-      returning: true,
+    const newReview = await Reviews.create({
+      ...req.body,
+      productId: req.params.id,
     });
-    res.send(result[1][0]);
+    res.send(newReview);
   } catch (error) {
     console.log(error);
   }
