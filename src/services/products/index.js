@@ -1,13 +1,40 @@
 import express from "express";
-import { Review, Product } from "../../db/models/index.js";
+import { Product } from "../../db/models/index.js";
+import sequelize from "sequelize";
+const { Op } = sequelize;
 const router = express.Router();
 
 router
   .route("/")
   .get(async (req, res, next) => {
     try {
-      const data = await Review.findAll({
-        include: Product,
+      const data = await Product.findAll({
+        include: Review,
+
+        where: {
+          ...(req.query.search && {
+            [Op.or]: [
+              {
+                name: {
+                  [Op.iLike]: `%${req.query.search}%`,
+                },
+              },
+              {
+                description: {
+                  [Op.iLike]: `%${req.query.search}%`,
+                },
+              },
+            ],
+          }),
+
+          ...(req.query.price && {
+            price: {
+              [Op.between]: req.query.price.split(","),
+            },
+          }),
+        },
+
+        ...(req.query.order && { order: [req.query.order.split(",")] }),
       });
       res.send(data);
     } catch (e) {
@@ -17,7 +44,7 @@ router
   })
   .post(async (req, res, next) => {
     try {
-      const data = await Review.create(req.body);
+      const data = await Product.create(req.body);
       res.send(data);
     } catch (e) {
       console.log(e);
@@ -29,11 +56,11 @@ router
   .route("/:id")
   .get(async (req, res, next) => {
     try {
-      const data = await Review.findOne({
+      const data = await Product.findOne({
+        include: Review,
         where: {
           id: req.params.id,
         },
-        include: Product,
       });
       res.send(data);
     } catch (e) {
@@ -43,7 +70,7 @@ router
   })
   .put(async (req, res, next) => {
     try {
-      const data = await Review.update(req.body, {
+      const data = await Product.update(req.body, {
         where: {
           id: req.params.id,
         },
@@ -58,7 +85,7 @@ router
   })
   .delete(async (req, res, next) => {
     try {
-      const data = await Review.destroy({
+      const data = await Product.destroy({
         where: {
           id: req.params.id,
         },

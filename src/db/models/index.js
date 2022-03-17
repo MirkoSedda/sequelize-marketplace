@@ -1,7 +1,7 @@
 import Product from "./product.js";
-import Reviews from "./reviews.js";
+import Review from "./reviews.js";
 
-Reviews.belongsTo(Product, { onDelete: "CASCADE" });
-Product.hasMany(Reviews, { onDelete: "CASCADE" });
+Product.hasMany(Review, { onDelete: "CASCADE" });
+Review.belongsTo(Product, { onDelete: "CASCADE" });
 
-export { Product, Reviews };
+export { Product, Review };
