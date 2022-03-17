@@ -1,19 +1,19 @@
 import sequelize from "../index.js";
 
 import s from "sequelize";
+
 const { DataTypes } = s;
 
-const Review = sequelize.define("review", {
+const Category = sequelize.define("category", {
   id: {
+    primaryKey: true,
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
   },
-
-  text: {
+  name: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
 });
 
-export default Review;
+export default Category;
